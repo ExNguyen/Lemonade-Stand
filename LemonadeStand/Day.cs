@@ -9,8 +9,32 @@ namespace LemonadeStand
 {
     class Day
     {
+        // member variables (HAS A)
         public Weather weather;
         public List<Customer> customers;
-    
+
+        // constructor (SPAWNER)
+        public Day()
+        {
+            weather = new Weather();
+            customers = new List<Customer>();
+        }
+
+        // member methods (CAN DO)
+        public void AddCustomer(Customer customer)
+        {
+            customers.Add(customer);
+        }
+        public void SimulateDay()
+        {
+            string currentWeather = weather.GetRandomWeather();
+            Console.WriteLine($"Today's weather is {currentWeather}.");
+
+            foreach (Customer customer in customers)
+            {
+                customer.ActAccordingToWeather(currentWeather);//, price);
+            }
+
+        }
     }
 }

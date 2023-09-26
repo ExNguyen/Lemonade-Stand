@@ -19,12 +19,12 @@ namespace LemonadeStand
         {
             player = new Player();
             days = new List<Day>();
-            currentDay = 7;
+            
 
         }
 
         // member methods (CAN DO)
-
+        
 
     }
 }
