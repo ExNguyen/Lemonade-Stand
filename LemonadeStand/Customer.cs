@@ -46,8 +46,17 @@ namespace LemonadeStand
             //}
 
             double probability = weatherFactor; //* priceFactor;
+            
 
-            return random.NextDouble() < probability;
+           if(random.NextDouble() < probability)
+           {
+                if(wallet.Money > price)
+                Console.WriteLine("Customer bought a cup of lemonade!");
+                player.wallet.Money++;
+                return true;
+           }
+
+            return false;
         }
     }
 }

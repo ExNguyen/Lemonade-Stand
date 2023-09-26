@@ -30,9 +30,6 @@ namespace LemonadeStand
             string currentWeather = weather.GetRandomWeather();
             Console.WriteLine($"Today's weather is {currentWeather}.");
 
-            foreach (Customer customer in customers)
-            {
-                customer.ActAccordingToWeather(currentWeather);//, price);
             }
 
         }
