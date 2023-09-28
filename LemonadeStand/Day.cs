@@ -21,17 +21,7 @@ namespace LemonadeStand
         }
 
         // member methods (CAN DO)
-        public void AddCustomer(Customer customer)
-        {
-            customers.Add(customer);
-        }
-        public void SimulateDay()
-        {
-            string currentWeather = weather.GetRandomWeather();
-            Console.WriteLine($"Today's weather is {currentWeather}.");
-
-            }
-
-        }
+        
+        
     }
 }

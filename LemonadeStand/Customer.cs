@@ -23,7 +23,7 @@ namespace LemonadeStand
         }
 
         // member methods (CAN DO)
-        public bool ActAccordingToWeather(string currentWeather)//, double price)
+        public bool ActAccordingToWeather(string currentWeather, double price)
         {
             double weatherFactor = 1.0;
             if(currentWeather == "Sunny")
@@ -39,20 +39,22 @@ namespace LemonadeStand
                 weatherFactor = 0.2;
             }
 
-            //double priceFactor = 1.0;
-            //if(price > 1.0)
-            //{
-            //    priceFactor = 0.8;
-            //}
+            Recipe recipe = new Recipe();
+            double priceFactor = 1.0;
+            if (recipe.pricePerCup > 1.0)
+            {
+                priceFactor = 0.8;
+            }
 
-            double probability = weatherFactor; //* priceFactor;
+            double probability = weatherFactor * priceFactor;
             
 
            if(random.NextDouble() < probability)
            {
-                if(wallet.Money > price)
-                Console.WriteLine("Customer bought a cup of lemonade!");
-                player.wallet.Money++;
+                if (wallet.Money > recipe.pricePerCup)
+                    Console.WriteLine("Customer bought a cup of lemonade!");
+                Player player = new Player();
+                player.wallet.AcceptMoney(recipe.pricePerCup);
                 return true;
            }
 

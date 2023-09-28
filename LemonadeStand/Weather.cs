@@ -24,6 +24,7 @@ namespace LemonadeStand
             Random random = new Random();
 
             int weatherIndex = random.Next(0, weatherConditions.Count);
+
             condition = weatherConditions[weatherIndex];
             if (condition == "Sunny")
             {
