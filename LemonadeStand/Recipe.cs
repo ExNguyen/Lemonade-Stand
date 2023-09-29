@@ -27,15 +27,44 @@ namespace LemonadeStand
         //Member Methods (CAN DO)
         public void DisplayRecipe()
         {
-            Console.WriteLine($"Your recipe currently consists of:" +
-                $"\n{numberOfLemons} lemons per pitcher" +
-                $"\n{numberOfSugarCubes} sugar cubes per pitcher" +
-                $"\n{numberOfIceCubes} ice cubes per pitcher");
+            Console.WriteLine($"\nEach pitcher consists of:" +
+                $"\n{numberOfLemons} lemons" +
+                $"\n{numberOfSugarCubes} sugar cubes" +
+                $"\n{numberOfIceCubes} ice cubes");
         }
 
         public void ChangeRecipe()
         {
-            Console.WriteLine("Would you like to change your recipe?");
+            int newNumberOfLemons = UserInterface.ChangeItemRecipe("lemons");
+            numberOfLemons = newNumberOfLemons;
+
+            int newNumberOfSugarCubes = UserInterface.ChangeItemRecipe("sugar cubes");
+            numberOfSugarCubes = newNumberOfSugarCubes;
+
+            int newNumberOfIceCubes = UserInterface.ChangeItemRecipe("ice cubes");
+            numberOfIceCubes = newNumberOfIceCubes;
+
+            DisplayRecipe();
+
+        }
+
+        public void ChangePricePerCup()
+        {
+            //Console.WriteLine("How much would you like to charge per cup?");
+            //int priceChange = int.Parse(Console.ReadLine());
+            bool userInputIsAnInteger = false;
+            double priceChange = -1;
+
+            while (!userInputIsAnInteger || priceChange < 0)
+            {
+                Console.WriteLine("How much would you like to charge per cup?");
+                Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
+
+                userInputIsAnInteger = double.TryParse(Console.ReadLine(), out priceChange);
+            }
+
+            pricePerCup = priceChange;
+            
         }
 
     }
