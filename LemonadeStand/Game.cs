@@ -70,18 +70,20 @@ namespace LemonadeStand
                 {
                     recipe.ChangeRecipe();
                 }
-                else if(changeRecipe == "N")
-                {
-
-                }
+                else if(changeRecipe == "N"){}
                 else
                 {
                     Console.WriteLine("Invalid input. Please select Y or N.");
                 }
 
-                Console.WriteLine($"Todays forecast: {current.weather.predictedForcast}");
+                Console.WriteLine($"\nTodays forecast: {current.weather.predictedForcast}\n ");
 
-                UserInterface.GetNumberOfPitchers();
+                recipe.CreatePitchers(player: player);
+
+                recipe.ChangePricePerCup();
+
+                
+                
 
 
                 currentDay++;

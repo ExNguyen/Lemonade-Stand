@@ -12,6 +12,7 @@ namespace LemonadeStand
         public int numberOfLemons;
         public int numberOfSugarCubes;
         public int numberOfIceCubes;
+        public int numberOfCups;
         public double pricePerCup;
 
 
@@ -27,7 +28,7 @@ namespace LemonadeStand
         //Member Methods (CAN DO)
         public void DisplayRecipe()
         {
-            Console.WriteLine($"\nEach pitcher consists of:" +
+            Console.WriteLine($"\nYour recipe per pitcher consists of:" +
                 $"\n{numberOfLemons} lemons" +
                 $"\n{numberOfSugarCubes} sugar cubes" +
                 $"\n{numberOfIceCubes} ice cubes");
@@ -35,6 +36,7 @@ namespace LemonadeStand
 
         public void ChangeRecipe()
         {
+
             int newNumberOfLemons = UserInterface.ChangeItemRecipe("lemons");
             numberOfLemons = newNumberOfLemons;
 
@@ -50,14 +52,12 @@ namespace LemonadeStand
 
         public void ChangePricePerCup()
         {
-            //Console.WriteLine("How much would you like to charge per cup?");
-            //int priceChange = int.Parse(Console.ReadLine());
             bool userInputIsAnInteger = false;
             double priceChange = -1;
 
             while (!userInputIsAnInteger || priceChange < 0)
             {
-                Console.WriteLine("How much would you like to charge per cup?");
+                Console.WriteLine("\nHow much would you like to charge per cup?");
                 Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
 
                 userInputIsAnInteger = double.TryParse(Console.ReadLine(), out priceChange);
@@ -66,6 +66,32 @@ namespace LemonadeStand
             pricePerCup = priceChange;
             
         }
+
+        public void CreatePitchers(Player player)
+        {
+            int pitcherIndex = UserInterface.GetNumberOfPitchers();
+
+            int lemonsToSubtract = numberOfLemons * pitcherIndex;
+            player.inventory.RemoveLemonsFromInventory(lemonsToSubtract);
+
+            int sugarCubesToSubtract = numberOfSugarCubes * pitcherIndex;
+            player.inventory.RemoveSugarCubesFromInventory(sugarCubesToSubtract);
+
+            int iceCubesToSubtract = numberOfIceCubes * pitcherIndex;
+            player.inventory.RemoveIceCubesFromInventory(iceCubesToSubtract);
+
+            int cupsToSubtract = 8 * pitcherIndex;
+            player.inventory.RemoveCupsFromInventory(cupsToSubtract);
+            
+        }
+
+        
+
+
+
+            
+
+        
 
     }
 }
