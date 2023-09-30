@@ -82,8 +82,10 @@ namespace LemonadeStand
 
                 recipe.ChangePricePerCup();
 
-                
-                
+
+                UserInterface.GenerateCustomers(day: current);
+
+
 
 
                 currentDay++;

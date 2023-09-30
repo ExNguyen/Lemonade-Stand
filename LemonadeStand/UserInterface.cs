@@ -56,20 +56,19 @@ namespace LemonadeStand
             return quantityOfItem;
         }
 
+        public static void GenerateCustomers(Day day)
+        {
+            Random random = new Random();
+            if(day.weather.condition == "Sunny")
+            {
+                int customerIndex = random.Next(1, 70);
+                for(int i = 0; i < customerIndex; i++)
+                {
+                    Customer customer = new Customer();
+                }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+        }
 
 
 

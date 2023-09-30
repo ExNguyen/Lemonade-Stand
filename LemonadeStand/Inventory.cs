@@ -13,6 +13,7 @@ namespace LemonadeStand
         public List<SugarCube> sugarCubes;
         public List<IceCube> iceCubes;
         public List<Cup> cups;
+        public List<Lemonade> Lemonades;
 
         // constructor (SPAWNER)
         public Inventory()
@@ -21,6 +22,7 @@ namespace LemonadeStand
             sugarCubes = new List<SugarCube>();
             iceCubes = new List<IceCube>();
             cups = new List<Cup>();
+            Lemonades = new List<Lemonade>();
             AddLemonsToInventory(20);
             AddSugarCubesToInventory(20);
             AddIceCubesToInventory(100);
@@ -74,7 +76,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("You have no lemons in your inventory");
+                    Console.WriteLine("You don't lemons in your inventory");
                 }
             }
         }
@@ -88,7 +90,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("You don't have no sugar cubes in your inventory");
+                    Console.WriteLine("You don't have sugar cubes in your inventory");
                 }
         }
 
@@ -101,7 +103,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("You don't have no ice cubes in your inventory");
+                    Console.WriteLine("You don't have ice cubes in your inventory");
                 }
         }
 
@@ -114,10 +116,29 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("You don't have no cups in your inventory");
+                    Console.WriteLine("You don't have cups in your inventory");
                 }
         }
 
+        public void AddLemonade(int numberOfLemonade)
+        {
+            for (int i = 0; i < numberOfLemonade; i++)
+            {
+                Lemonade lemonade = new Lemonade();  
+            }
+        }
 
+        public void RemoveLemonade(int numberOfLemonade)
+        {
+            for (int i = 0; i < numberOfLemonade; i++)
+                if (Lemonades.Count > 0)
+                {
+                    Lemonades.RemoveAt(0);
+                }
+                else
+                {
+                    Console.WriteLine("You don't have anymore lemonade in your inventory");
+                }
+        }
     }
 }

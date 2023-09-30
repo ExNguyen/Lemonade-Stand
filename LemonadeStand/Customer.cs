@@ -9,37 +9,33 @@ namespace LemonadeStand
     internal class Customer
     {
         // member variables (HAS A)
-        public Day day;
         public Wallet wallet;
         private Random random;
 
         // constructor (SPAWNER)
-        public Customer(Day day)
+        public Customer()
         {
-            this.day = day;
             wallet = new Wallet();
             random = new Random();
-
         }
 
         // member methods (CAN DO)
-        public bool ActAccordingToWeather(string currentWeather, double price)
+        public bool ActAccordingToWeather(Day day, Recipe recipe, Player player)
         {
             double weatherFactor = 1.0;
-            if(currentWeather == "Sunny")
+            if(day.weather.condition == "Sunny")
             {
                 weatherFactor = 1.5;
             }
-            else if(currentWeather == "Cloudy")
+            else if(day.weather.condition == "Cloudy")
             {
                 weatherFactor = 0.7;
             }
-            else if(currentWeather == "Rainy")
+            else if(day.weather.condition == "Rainy")
             {
                 weatherFactor = 0.2;
             }
 
-            Recipe recipe = new Recipe();
             double priceFactor = 1.0;
             if (recipe.pricePerCup > 1.0)
             {
@@ -52,8 +48,9 @@ namespace LemonadeStand
            if(random.NextDouble() < probability)
            {
                 if (wallet.Money > recipe.pricePerCup)
-                    Console.WriteLine("Customer bought a cup of lemonade!");
-                Player player = new Player();
+                Console.WriteLine("Customer bought a cup of lemonade!");
+                player.inventory.RemoveLemonade(1);
+                
                 player.wallet.AcceptMoney(recipe.pricePerCup);
                 return true;
            }

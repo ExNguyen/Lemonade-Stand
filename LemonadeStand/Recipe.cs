@@ -70,6 +70,7 @@ namespace LemonadeStand
         public void CreatePitchers(Player player)
         {
             int pitcherIndex = UserInterface.GetNumberOfPitchers();
+            player.inventory.AddLemonade(pitcherIndex);
 
             int lemonsToSubtract = numberOfLemons * pitcherIndex;
             player.inventory.RemoveLemonsFromInventory(lemonsToSubtract);
@@ -82,7 +83,10 @@ namespace LemonadeStand
 
             int cupsToSubtract = 8 * pitcherIndex;
             player.inventory.RemoveCupsFromInventory(cupsToSubtract);
-            
+
+            Console.WriteLine($"\nYou have {cupsToSubtract} of lemonade.");
+
+
         }
 
         
