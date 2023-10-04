@@ -13,7 +13,7 @@ namespace LemonadeStand
         public List<SugarCube> sugarCubes;
         public List<IceCube> iceCubes;
         public List<Cup> cups;
-        public List<Lemonade> Lemonades;
+        public List<Lemonade> lemonades;
 
         // constructor (SPAWNER)
         public Inventory()
@@ -22,7 +22,7 @@ namespace LemonadeStand
             sugarCubes = new List<SugarCube>();
             iceCubes = new List<IceCube>();
             cups = new List<Cup>();
-            Lemonades = new List<Lemonade>();
+            lemonades = new List<Lemonade>();
             AddLemonsToInventory(20);
             AddSugarCubesToInventory(20);
             AddIceCubesToInventory(100);
@@ -70,74 +70,53 @@ namespace LemonadeStand
         {
             for (int i = 0; i < numberOfLemons; i++)
             {
-                if(lemons.Count > 0)
-                {
-                    lemons.RemoveAt(0);
-                }
-                else
-                {
-                    Console.WriteLine("You don't lemons in your inventory");
-                }
+                    lemons.RemoveAt(0);               
             }
         }
 
         public void RemoveSugarCubesFromInventory(int numberOfSugarCubes)
         {
             for (int i = 0; i < numberOfSugarCubes; i++)
-                if (sugarCubes.Count > 0)
-                {
-                    sugarCubes.RemoveAt(0);
-                }
-                else
-                {
-                    Console.WriteLine("You don't have sugar cubes in your inventory");
-                }
+            {
+                sugarCubes.RemoveAt(0);
+            }
         }
 
         public void RemoveIceCubesFromInventory(int numberOfIceCubes)
         {
             for (int i = 0; i < numberOfIceCubes; i++)
-                if (iceCubes.Count > 0)
-                {
-                    iceCubes.RemoveAt(0);
-                }
-                else
-                {
-                    Console.WriteLine("You don't have ice cubes in your inventory");
-                }
+            {
+                iceCubes.RemoveAt(0);
+            }
         }
 
         public void RemoveCupsFromInventory(int numberOfCups)
         {
             for (int i = 0; i < numberOfCups; i++)
-                if (cups.Count > 0)
-                {
-                    cups.RemoveAt(0);
-                }
-                else
-                {
-                    Console.WriteLine("You don't have cups in your inventory");
-                }
+            {
+                cups.RemoveAt(0);
+            }
         }
 
         public void AddLemonade(int numberOfLemonade)
         {
-            for (int i = 0; i < numberOfLemonade; i++)
+            for (int i = 0; i < numberOfLemonade * 8; i++)
             {
-                Lemonade lemonade = new Lemonade();  
+                Lemonade lemonade = new Lemonade();
+                lemonades.Add(lemonade);
             }
         }
 
         public void RemoveLemonade(int numberOfLemonade)
         {
             for (int i = 0; i < numberOfLemonade; i++)
-                if (Lemonades.Count > 0)
+                if (lemonades.Count > 0)
                 {
-                    Lemonades.RemoveAt(0);
+                    lemonades.RemoveAt(0);
                 }
                 else
                 {
-                    Console.WriteLine("You don't have anymore lemonade in your inventory");
+                    Console.WriteLine("You are out of lemonade!");
                 }
         }
     }

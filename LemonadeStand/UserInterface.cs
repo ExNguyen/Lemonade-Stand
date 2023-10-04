@@ -31,7 +31,7 @@ namespace LemonadeStand
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {
-                Console.WriteLine("Each pitcher pours 8 cups. How many pitchers would you like to make?");
+                Console.WriteLine("\nEach pitcher pours 8 cups. How many pitchers would you like to make?");
                 Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
@@ -47,7 +47,7 @@ namespace LemonadeStand
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {
-                Console.WriteLine("How many " + item + " would you like to put per pitcher?");
+                Console.WriteLine("\nHow many " + item + " would you like to put per pitcher?");
                 Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
@@ -56,21 +56,44 @@ namespace LemonadeStand
             return quantityOfItem;
         }
 
-        public static void GenerateCustomers(Day day)
+        public static void GenerateCustomers(Day day, Player player)
         {
             Random random = new Random();
-            if(day.weather.condition == "Sunny")
+            if (day.weather.condition == "Sunny")
             {
+                
                 int customerIndex = random.Next(1, 70);
-                for(int i = 0; i < customerIndex; i++)
+                for (int i = 0; i < customerIndex; i++)
                 {
                     Customer customer = new Customer();
+                    Console.WriteLine("A customer walks by . . . ");
+                    customer.ActAccordingToWeather(day: day, player: player);
+                }
+
+            }
+            else if (day.weather.condition == "Rainy")
+            {
+                
+                int customerIndex = random.Next(1, 20);
+                for (int i = 0; i < customerIndex; i++)
+                {
+                    Customer customer = new Customer();
+                    Console.WriteLine("A customer walks by . . . ");
+                    customer.ActAccordingToWeather(day: day, player: player);
+                }
+            }
+            else
+            {
+                
+                int customerIndex = random.Next(1, 40);
+                for (int i = 0; i < customerIndex; i++)
+                {
+                    Customer customer = new Customer();
+                    Console.WriteLine("A customer walks by . . . ");
+                    customer.ActAccordingToWeather(day: day, player: player);
                 }
 
             }
         }
-
-
-
     }
 }

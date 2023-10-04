@@ -24,7 +24,6 @@ namespace LemonadeStand
             foreach (string dayName in dayNames)
             {
                 Day newDay = new Day();
-                newDay.weather.condition = dayName;
                 days.Add(newDay);
             }
             currentDay = 0;
@@ -51,8 +50,8 @@ namespace LemonadeStand
                     $"\n{player.inventory.iceCubes.Count} Ice Cubes\n");
 
 
-                // Your game logic here - allow the player to buy ingredients, set prices, and sell lemonade.
-  
+                Console.WriteLine($"\nTodays forecast: {current.weather.predictedForcast}\n ");
+
                 Store store = new Store();
                 store.SellLemons(player: player);
                 store.SellSugarCubes(player: player);
@@ -64,28 +63,31 @@ namespace LemonadeStand
                 Recipe recipe = new Recipe();
                 recipe.DisplayRecipe();
 
-                Console.WriteLine("\nWould you like to change your recipe? Y/N");
-                string changeRecipe = Console.ReadLine().ToUpper();
-                if(changeRecipe == "Y")
+                string changeRecipe;
+                do
                 {
-                    recipe.ChangeRecipe();
-                }
-                else if(changeRecipe == "N"){}
-                else
-                {
-                    Console.WriteLine("Invalid input. Please select Y or N.");
-                }
-
-                Console.WriteLine($"\nTodays forecast: {current.weather.predictedForcast}\n ");
+                    Console.WriteLine("\nWould you like to change your recipe? Y/N");
+                    changeRecipe = Console.ReadLine().ToUpper();
+                    if (changeRecipe == "Y")
+                    {
+                        recipe.ChangeRecipe();
+                    }
+                    else if (changeRecipe == "N") { }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please select Y or N.");
+                    }
+                } while (changeRecipe != "Y" || changeRecipe != "N");
 
                 recipe.CreatePitchers(player: player);
 
-                recipe.ChangePricePerCup();
+                Console.WriteLine($"Todays weather: {current.weather.temperature} and {current.weather.condition}");
 
+                player.recipe.ChangePricePerCup();
 
-                UserInterface.GenerateCustomers(day: current);
+                UserInterface.GenerateCustomers(day: current, player: player);
 
-
+                Console.WriteLine($"\nYou ended the day with ${player.wallet.Money}.");
 
 
                 currentDay++;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,6 +78,31 @@ namespace LemonadeStand
         private void PerformTransaction(Wallet wallet, double transactionAmount)
         {
             wallet.PayMoneyForItems(transactionAmount);
+        }
+
+        public void RevisitStore(Player player)
+        {
+            Console.WriteLine("You do not have enough in your inventory to make the selected amount of pitchers. \nTry making less or revisit the store.");
+
+            string revisitStore;
+            do
+            {
+                Console.WriteLine("\nWould you like to revisit the store? Y/N");
+                revisitStore = Console.ReadLine().ToUpper();
+                if (revisitStore == "Y")
+                {
+                    Store store = new Store();
+                    store.SellLemons(player: player);
+                    store.SellSugarCubes(player: player);
+                    store.SellCups(player: player);
+                    store.SellIceCubes(player: player);
+                }
+                else if (revisitStore == "N") { }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please select Y or N.");
+                }
+            } while (revisitStore != "Y" || revisitStore != "N");
         }
     }
 }

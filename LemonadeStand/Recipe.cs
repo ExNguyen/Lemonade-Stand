@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,31 +64,52 @@ namespace LemonadeStand
                 userInputIsAnInteger = double.TryParse(Console.ReadLine(), out priceChange);
             }
 
-            pricePerCup = priceChange;
+            this.pricePerCup = priceChange;
             
         }
 
         public void CreatePitchers(Player player)
         {
             int pitcherIndex = UserInterface.GetNumberOfPitchers();
-            player.inventory.AddLemonade(pitcherIndex);
 
             int lemonsToSubtract = numberOfLemons * pitcherIndex;
-            player.inventory.RemoveLemonsFromInventory(lemonsToSubtract);
-
             int sugarCubesToSubtract = numberOfSugarCubes * pitcherIndex;
-            player.inventory.RemoveSugarCubesFromInventory(sugarCubesToSubtract);
-
             int iceCubesToSubtract = numberOfIceCubes * pitcherIndex;
-            player.inventory.RemoveIceCubesFromInventory(iceCubesToSubtract);
-
             int cupsToSubtract = 8 * pitcherIndex;
-            player.inventory.RemoveCupsFromInventory(cupsToSubtract);
 
-            Console.WriteLine($"\nYou have {cupsToSubtract} of lemonade.");
+            do
+            {
+                if (player.inventory.lemons.Count >= lemonsToSubtract
+                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
+                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
+                && player.inventory.iceCubes.Count >= iceCubesToSubtract
+                && player.inventory.cups.Count >= cupsToSubtract)
+                {
+                    player.inventory.RemoveLemonsFromInventory(lemonsToSubtract);
+                    player.inventory.RemoveSugarCubesFromInventory(sugarCubesToSubtract);
+                    player.inventory.RemoveIceCubesFromInventory(iceCubesToSubtract);
+                    player.inventory.RemoveCupsFromInventory(cupsToSubtract);
 
+                    player.inventory.AddLemonade(pitcherIndex);
 
+                    Console.WriteLine($"\nYou have {cupsToSubtract} cups of lemonade.");
+                }
+                else
+                {
+                    Store store = new Store();
+                    store.RevisitStore(player: player);
+                }
+            } while (player.inventory.lemons.Count >= lemonsToSubtract
+                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
+                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
+                && player.inventory.iceCubes.Count >= iceCubesToSubtract
+                && player.inventory.cups.Count >= cupsToSubtract);
         }
+
+
+
+
+        
 
         
 
