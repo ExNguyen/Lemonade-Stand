@@ -82,7 +82,7 @@ namespace LemonadeStand
 
         public void RevisitStore(Player player)
         {
-            Console.WriteLine("You do not have enough in your inventory to make the selected amount of pitchers. \nTry making less or revisit the store.");
+            Console.WriteLine("\nYou do not have enough in your inventory to make the selected amount of pitchers. \nTry making less or revisit the store.");
 
             string revisitStore;
             do
@@ -91,18 +91,17 @@ namespace LemonadeStand
                 revisitStore = Console.ReadLine().ToUpper();
                 if (revisitStore == "Y")
                 {
-                    Store store = new Store();
-                    store.SellLemons(player: player);
-                    store.SellSugarCubes(player: player);
-                    store.SellCups(player: player);
-                    store.SellIceCubes(player: player);
+                    UserInterface.VisitStore(player: player);
                 }
-                else if (revisitStore == "N") { }
+                else if (revisitStore == "N")
+                {
+                    player.recipe.RechangeRecipe(player: player);
+                }
                 else
                 {
                     Console.WriteLine("Invalid input. Please select Y or N.");
                 }
-            } while (revisitStore != "Y" || revisitStore != "N");
+            } while (revisitStore != "Y" && revisitStore != "N");
         }
     }
 }

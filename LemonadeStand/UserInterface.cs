@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,5 +96,25 @@ namespace LemonadeStand
 
             }
         }
+
+        public static void VisitStore(Player player)
+        {
+            Store store = new Store();
+            store.SellLemons(player: player);
+            store.SellSugarCubes(player: player);
+            store.SellCups(player: player);
+            store.SellIceCubes(player: player);
+        }
+
+        public static void DisplayGreeting()
+        {
+            Console.WriteLine("Welcome to Lemonade Stand Game! " +
+                "\nYou have seven days to make as much money as you can. " +
+                "\nThe weather and you price for a cup of lemonade will affect your success. " +
+                "\nGood luck and make as much as you can.");
+            
+        }
+
+
     }
 }

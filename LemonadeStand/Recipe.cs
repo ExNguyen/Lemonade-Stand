@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,15 +38,28 @@ namespace LemonadeStand
 
         public void ChangeRecipe()
         {
+            string changeRecipe;
+            do
+            {
+                Console.WriteLine("\nWould you like to change your recipe? Y/N");
+                changeRecipe = Console.ReadLine().ToUpper();
+                if (changeRecipe == "Y")
+                {
+                    int newNumberOfLemons = UserInterface.ChangeItemRecipe("lemons");
+                    numberOfLemons = newNumberOfLemons;
 
-            int newNumberOfLemons = UserInterface.ChangeItemRecipe("lemons");
-            numberOfLemons = newNumberOfLemons;
+                    int newNumberOfSugarCubes = UserInterface.ChangeItemRecipe("sugar cubes");
+                    numberOfSugarCubes = newNumberOfSugarCubes;
 
-            int newNumberOfSugarCubes = UserInterface.ChangeItemRecipe("sugar cubes");
-            numberOfSugarCubes = newNumberOfSugarCubes;
-
-            int newNumberOfIceCubes = UserInterface.ChangeItemRecipe("ice cubes");
-            numberOfIceCubes = newNumberOfIceCubes;
+                    int newNumberOfIceCubes = UserInterface.ChangeItemRecipe("ice cubes");
+                    numberOfIceCubes = newNumberOfIceCubes;
+                }
+                else if (changeRecipe == "N") { }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please select Y or N.");
+                }
+            } while (changeRecipe != "Y" && changeRecipe != "N");
 
             DisplayRecipe();
 
@@ -77,14 +91,12 @@ namespace LemonadeStand
             int iceCubesToSubtract = numberOfIceCubes * pitcherIndex;
             int cupsToSubtract = 8 * pitcherIndex;
 
-            do
-            {
-                if (player.inventory.lemons.Count >= lemonsToSubtract
+            if (player.inventory.lemons.Count >= lemonsToSubtract
                 && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
                 && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
                 && player.inventory.iceCubes.Count >= iceCubesToSubtract
                 && player.inventory.cups.Count >= cupsToSubtract)
-                {
+            {                
                     player.inventory.RemoveLemonsFromInventory(lemonsToSubtract);
                     player.inventory.RemoveSugarCubesFromInventory(sugarCubesToSubtract);
                     player.inventory.RemoveIceCubesFromInventory(iceCubesToSubtract);
@@ -92,20 +104,33 @@ namespace LemonadeStand
 
                     player.inventory.AddLemonade(pitcherIndex);
 
-                    Console.WriteLine($"\nYou have {cupsToSubtract} cups of lemonade.");
-                }
-                else
-                {
-                    Store store = new Store();
-                    store.RevisitStore(player: player);
-                }
-            } while (player.inventory.lemons.Count >= lemonsToSubtract
-                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
-                && player.inventory.sugarCubes.Count >= sugarCubesToSubtract
-                && player.inventory.iceCubes.Count >= iceCubesToSubtract
-                && player.inventory.cups.Count >= cupsToSubtract);
+                    Console.WriteLine($"\nYou have {cupsToSubtract} cups of lemonade.");                
+            }
+            else 
+            {
+                Store store = new Store();
+                store.RevisitStore(player: player);
+            }
         }
 
+        public void RechangeRecipe(Player player)
+        {
+            string rechangeRecipe;
+            do
+            {
+                Console.WriteLine("\nWould you like to change the amount of pitchers? Y/N");
+                rechangeRecipe = Console.ReadLine().ToUpper();
+                if (rechangeRecipe == "Y")
+                {
+                    player.recipe.CreatePitchers(player: player); ;
+                }
+                else if (rechangeRecipe == "N") { }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please select Y or N.");
+                }
+            } while (rechangeRecipe != "Y" && rechangeRecipe != "N");
+        }
 
 
 
